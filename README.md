@@ -89,6 +89,25 @@ The CSS is inserted with the default author origin, which is how the wiki
 examples were written — so `!important` means what it means there, and no rule
 behaves differently just because it is applied by this widget.
 
+## Standalone: not the built-in setting
+
+electerm has its own **Settings → Common → Custom CSS** box, which the app applies
+into `<style id="custom-css">` and syncs across your devices. This widget does not
+read or write it. It keeps its own stylesheet and inserts it from the main process.
+The two can do the same thing, and they can both be active at once:
+
+| | built-in setting | this widget |
+| --- | --- | --- |
+| CSS lives in | `config.customCss`, synced | the widget's config, this machine |
+| applied by | the app, into `<style id="custom-css">` | `webContents.insertCSS` |
+| presets | none | the five wiki examples |
+| CSS from a file | no | yes, watched |
+| in the cascade | last sheet in the document | after the app's CSS, before that sheet |
+
+The last row is the one that bites: with both active, a rule that appears in both
+places is won by the **setting**, because its sheet is last in the document
+(measured). Keep a given rule in one place, not both.
+
 ## Limits
 
 - **CSS only.** It cannot run JavaScript. `@import` rules are stripped before
