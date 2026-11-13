@@ -1,0 +1,82 @@
+{
+  "name": "custom-css",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Apply a stylesheet to electerm's own window, with the wiki examples as presets",
+  "main": "main.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "electerm": {
+    "id": "custom-css",
+    "name": "Custom CSS",
+    "description": "Style electerm itself. Pick one of the wiki's CSS examples, point at a CSS file, or paste your own.",
+    "version": "1.0.0",
+    "type": "instance",
+    "singleInstance": true,
+    "persist": true,
+    "configs": [
+      {
+        "name": "preset",
+        "label": "Preset",
+        "type": "select",
+        "default": "none",
+        "description": "A stylesheet from the wiki's Custom CSS examples. To combine two of them, keep one here and paste the other into the CSS box.",
+        "choices": [
+          {
+            "label": "None",
+            "value": "none"
+          },
+          {
+            "label": "Terminal background image: stretch to 100%",
+            "value": "stretch-terminal-background"
+          },
+          {
+            "label": "SFTP panel: hide the local pane",
+            "value": "sftp-hide-local"
+          },
+          {
+            "label": "SFTP panel: swap local and remote panes",
+            "value": "sftp-swap-panes"
+          },
+          {
+            "label": "Hide the AI suggestion menu",
+            "value": "hide-ai-suggestions"
+          },
+          {
+            "label": "Split view: always stack terminal above SFTP",
+            "value": "split-view-stack"
+          }
+        ]
+      },
+      {
+        "name": "cssFile",
+        "label": "CSS file",
+        "type": "file",
+        "description": "Optional. A .css file to apply; edited changes are picked up while the widget runs.",
+        "filters": [
+          {
+            "name": "CSS",
+            "extensions": [
+              "css"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "css",
+        "label": "CSS",
+        "type": "textarea",
+        "description": "Optional. Extra CSS, applied after the preset and the file."
+      },
+      {
+        "name": "autoRun",
+        "label": "Apply on launch",
+        "type": "boolean",
+        "default": true,
+        "description": "Re-apply the stylesheet on every launch. This is the switch that puts the widget in electerm's auto-run list."
+      }
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+.DS_Store
+*.log
+# no node_modules here on purpose: this widget has no dependencies, and importing
+# a widget copies the folder as-is and never runs npm install
+node_modules/
